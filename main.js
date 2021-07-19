@@ -8,6 +8,8 @@ const client = new Discord.Client();
 
 const prefix = process.env.prefix;
 
+const Game = require('./object/game')
+
 const fs = require('fs');
 
 client.commands = new Discord.Collection();
@@ -18,6 +20,8 @@ for(const file of commandFiles){
 
     client.commands.set(command.name, command);
 }
+
+client.currentGames = new Discord.Collection();
 
 client.on('message', msg=>{
     // On pinged
@@ -72,6 +76,18 @@ client.on('message', msg=>{
             break;
         case 'commands':
             client.commands.get('commands').execute(msg,client)
+            break;
+        case 'tictactoe':
+            client.commands.get('tictactoe').execute(msg,args,client)
+            break;
+        case 'endgame':
+            client.commands.get('endgame').execute(msg,client)
+            break;
+        case 'place':
+            client.commands.get('place').execute(msg, args, client)
+            break;
+        case 'stats':
+            client.commands.get('stats').execute(msg, args)
             break;
         default:
             break;

@@ -36,7 +36,7 @@ module.exports = {
                 msg.channel.send('leaving channel');
             });
  
-            await msg.reply(`playing ${video.title}\n${video.url}`)
+            await msg.reply(`playing ${args[0]}`)
  
             return
         }
